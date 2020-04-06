@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include "Game.h"
+#include "GUI.h"
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -10,12 +11,11 @@
 
 int main(int argc, char* argv[])
 {
-	Game bilard;
 	QApplication a(argc, argv);
 	//bilard.start();
-	QGraphicsScene* scene = new QGraphicsScene();
-	QGraphicsView* view = new QGraphicsView(scene);
-	bilard.draw(scene);
-	view->show();
+	GUI* gui = new GUI();
+	Game bilard(gui);
+	bilard.draw();
+	gui->show();
 	return a.exec();
 }

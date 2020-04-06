@@ -3,31 +3,23 @@
 #include <ctime>
 
 
-Board::Board(int guiWidth, int guiHeight, int guiCoef, int width, int height, int cof, int diameter, int mass, int cue_mass)
+Board::Board(int guiCoef, int width, int height, int cof, int diameter, int mass, int cue_mass,GUI* gui)
 {
+	/*print("test");*/
 	//std::cout << guiWidth << ' ' << guiHeight << ' ' << guiCoef;
-	this->guiWidth = guiWidth* (guiCoef / 100.);
-	this->guiHeight = guiHeight* (guiCoef / 100.);
+	this->gui = gui;
 	this->width=width;
 	this->height=height;
 	this->cof=cof;
 	this->r=diameter/2;
 	this->mass = mass;
 	this->cue_mass = cue_mass;
+	balls = new std::vector <Ball*>();
 }
 
-void Board::draw(QGraphicsScene* scene)
+void Board::draw()
 {
-	QGraphicsRectItem* rect = new QGraphicsRectItem();
-	rect->setRect(0, 0, guiWidth, guiHeight);
-	rect->setBrush(Qt::darkGreen);
-	scene->addItem(rect);
-	for (int i = 0; i < 10; i++) {
-		QGraphicsEllipseItem* ellipse = new QGraphicsEllipseItem();
-		ellipse->setRect(10 + 24 * i, 10 + 24 * i, 30, 30);
-		ellipse->setBrush(Qt::darkRed);
-		scene->addItem(ellipse);
-	}
+	gui->draw();
 }
 
 void Board::setBalls()
@@ -42,9 +34,10 @@ void Board::setBalls()
 		Ball* ball = new Ball(r, k, mass, this); //TODO: ustawienie 8 (zamiana z 7) i rozne w rogach i losowo
 		k++;
 		ball->setInitialCoordinates(i,j,this);
-		balls.push_back(ball);
+		balls->push_back(ball);
 		}
 	}
+	gui->setBalls(balls);
 }
 
 //void Board::setBalls()
@@ -57,7 +50,7 @@ void Board::setBalls()
 //	for (int k = 1; k <= 15;k++)
 //	{
 //		Ball* ball = new Ball(r, k, mass, this);
-//		balls.push_back(ball);
+//		balls->push_back(ball);
 //	}
 //	balls[8]->setOnBoard(true);
 //	for (int i = 0;i <= 4;i++)
@@ -85,7 +78,3 @@ int Board::getHeight()
 	return height;
 }
 
-void Board::print()
-{
-	std::cout << width << ' ' << height << ' ' << cof << ' ' << r << std::endl;
-}
