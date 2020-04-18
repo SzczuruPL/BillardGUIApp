@@ -10,6 +10,7 @@
 #include "Ball.h"
 #include "GUI.h"
 class Ball;
+class GUI;
 class Board
 {
 private:
@@ -27,5 +28,6 @@ public:
 	void setBalls();
 	int getWidth();
 	int getHeight();
+	int getCof();
 };
 

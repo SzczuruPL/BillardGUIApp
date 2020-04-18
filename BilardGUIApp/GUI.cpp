@@ -18,7 +18,7 @@ void GUI::print(int i)
 {
 	//std::cout << width << ' ' << height << ' ' << cof << ' ' << r << std::endl;
 	std::string s = std::to_string(i);
-	QString qs = QString::fromStdString(s);
+	QString qs = QString::fromStdString("ala ma kota");
 	QGraphicsSimpleTextItem* text = new QGraphicsSimpleTextItem();
 	text->setText(qs);
 	text->setPos(0, 0);
@@ -31,19 +31,36 @@ void GUI::draw()
 	rect->setBrush(Qt::darkGreen);
 	scene->addItem(rect);
 	for (int i = 0; i < balls->size(); i++) {
+		int x = getGUICoordinateX(balls->at(i)->getX());
+		int y = getGUICoordinateY(balls->at(i)->getY());
 		QGraphicsEllipseItem* ellipse = new QGraphicsEllipseItem();
-		ellipse->setRect(balls->at(i)->getX(), balls->at(i)->getY(), 30, 30);
+		ellipse->setRect(x , y, guiDiameter, guiDiameter);
 		ellipse->setBrush(Qt::darkRed);
+		guiBalls.push_back(ellipse);
 		scene->addItem(ellipse);
+	}
+}
+void GUI::refresh()
+{
+	for (int i = 0; i < balls->size(); i++)
+	{
+		int x = getGUICoordinateX(balls->at(i)->getX());
+		int y = getGUICoordinateY(balls->at(i)->getY());
+		guiBalls.at(i)->setRect(x, y, guiDiameter, guiDiameter);
+		guiBalls.at(i)->setBrush(Qt::darkRed);
 	}
 }
 void GUI::setGuiWidth(int guiWidth)
 {
-	this->guiWidth = guiWidth* (guiCoef / 100.);
+	this->guiWidth = guiWidth * guiCoef / 100;
 }
 void GUI::setGuiHeight(int guiHeight)
 {
-	this->guiHeight = guiHeight* (guiCoef / 100.);
+	this->guiHeight = guiHeight * guiCoef / 100;
+}
+void GUI::setGuiDiameter(int guiDiameter)
+{
+	this->guiDiameter = guiDiameter * guiCoef / 100;
 }
 void GUI::setGuiCoef(int guiCoef)
 {
@@ -57,3 +74,27 @@ void GUI::show()
 {
 	view->show();
 }
+
+int GUI::getGUICoordinateX(int x)
+{
+	return (guiWidth * x / board->getWidth());
+}
+
+int GUI::getGUICoordinateY(int y)
+{
+	return (guiHeight * y / board->getHeight());
+}
+
+void GUI::hideBalls()
+{
+	for (int i = 0;i < guiBalls.size();i++)
+	{
+		if (balls->at(i)->hasChanged())
+		{
+			guiBalls.at(i)->setVisible(false);
+		}
+			
+	}
+}
+
+

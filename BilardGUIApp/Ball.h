@@ -16,6 +16,7 @@ private:
 	bool onBoard;
 	int mass;
 	Board* board;
+	bool changed;
 public:
 	Ball (int r, int number, int mass, Board* board);
 	Color getColor();
@@ -32,8 +33,6 @@ public:
 	void setInitialCoordinates(int i, int j,Board *board); //i-nr kolumny, j-nr przekatnej (patrz rys.1)
 	void setInitialCueCoordinates(Board* board);
 	void setOnBoard(bool onBoard);
-	int getGUICoordinateX(int guiWidth);
-	int getGUICoordinateY(int guiHeight);
 	bool isMoving();
 	void recountPosition();
 	void recountVelocity();
@@ -43,5 +42,6 @@ public:
 	bool isBlack();
 	bool isSolid();
 	bool isStriped();
+	bool hasChanged();
 };
 

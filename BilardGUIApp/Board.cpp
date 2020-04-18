@@ -70,11 +70,16 @@ void Board::setBalls()
 
 int Board::getWidth()
 {
-	return width;
+	return 2240;//width;
 }
 
 int Board::getHeight()
 {
-	return height;
+	return 1120;//height;
+}
+
+int Board::getCof()
+{
+	return cof;
 }
 

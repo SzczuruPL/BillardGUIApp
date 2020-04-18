@@ -1,5 +1,7 @@
 #include "Ball.h"
 #include "Game.h"
+#include <ctime>
+#include <cstdlib>
 
 Ball::Ball(int r, int number, int mass, Board* board)
 {
@@ -9,6 +11,7 @@ Ball::Ball(int r, int number, int mass, Board* board)
 	this->board = board;
 	speed = 0;
 	onBoard = false;
+	changed = rand() % 3;
 }
 
 Color Ball::getColor()
@@ -69,8 +72,8 @@ void Ball::move()
 void Ball::setInitialCoordinates(int i, int j,Board *board)
 {
 	int d = 2 * r;
-	x = i * sqrt(3) / 2 * d + 3. / 4. * board->getWidth();
-	y = i * d / 2. - d * j + board->getHeight() / 2.;
+	x = i * sqrt(3) / 2 * d + 3. / 4. * board->getWidth() ;
+	y = (double)i * d / 2.0 - (double) d * j + board->getHeight() / 2.0;
 }
 
 void Ball::setInitialCueCoordinates(Board* board)
@@ -82,16 +85,6 @@ void Ball::setInitialCueCoordinates(Board* board)
 void Ball::setOnBoard(bool onBoard)
 {
 	this->onBoard = onBoard;
-}
-
-int Ball::getGUICoordinateX(int guiWidth)
-{
-	return (x / (double)board->getWidth() * guiWidth);
-}
-
-int Ball::getGUICoordinateY(int guiHeight)
-{
-	return (y / (double)board->getHeight() * guiHeight);
 }
 
 bool Ball::isMoving()
@@ -134,4 +127,9 @@ bool Ball::isSolid()
 bool Ball::isStriped()
 {
 	return (getType() == STRIPED) ? (true) : (false);
+}
+
+bool Ball::hasChanged()
+{
+	return changed;
 }

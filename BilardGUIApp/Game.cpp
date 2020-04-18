@@ -11,7 +11,8 @@ Game::Game(GUI* gui)
 	gui->print(config["guiWidth"]);
 	gui->setGuiCoef(config["guiCoef"]);
 	gui->setGuiWidth(config["guiWidth"]);
-	gui->setGuiHeight(config["guiHeight"]);
+	gui->setGuiHeight(config["guiWidth"] * config["height"] / config["width"]);
+	gui->setGuiDiameter(config["diameter"] * config["guiWidth"]/ config["width"]);
 	player1 = new Player(board);
 	player2 = new Player(board);
 	intervalTime = config["intervalTime"];
