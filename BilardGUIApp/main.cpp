@@ -7,6 +7,8 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
+#include <QTime>
+
 
 
 int main(int argc, char* argv[])
@@ -17,7 +19,12 @@ int main(int argc, char* argv[])
 	GUI* gui = new GUI();
 	Game bilard(gui);
 	bilard.draw();
-	gui->hideBalls();
 	gui->show();
+
+	//bilard.hit(30);
+	//delay(100);
+
+	//gui->hideBalls();
+	
 	return a.exec();
 }
