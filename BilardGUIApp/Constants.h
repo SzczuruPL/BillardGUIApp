@@ -1,4 +1,5 @@
 #pragma once
+#include <QBrush>
 
 enum Color
 {
@@ -9,3 +10,4 @@ enum Type
 {
 	STRIPED, SOLID
 };
+

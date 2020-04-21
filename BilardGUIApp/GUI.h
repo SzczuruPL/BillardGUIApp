@@ -1,12 +1,15 @@
 #pragma once
 #include "Ball.h"
 #include "Board.h"
+#include "Constants.h"
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
 #include <vector>
+
+//QBrush qColor[] = { Qt::white,Qt::yellow };
 class Board;
 class Ball;
 class GUI
@@ -20,7 +23,9 @@ private:
 	int guiDiameter;
 	std::vector <Ball*> *balls;
 	std::vector <QGraphicsEllipseItem*> guiBalls;
+	std::vector <QGraphicsSimpleTextItem*> guiBallNumbers;
 	Board* board;
+	const QBrush qColor[9];
 public:
 	GUI();
 	void print(std::string s);
@@ -35,6 +40,8 @@ public:
 	void setBalls(std::vector <Ball*> *balls);
 	int getGUICoordinateX(int x);
 	int getGUICoordinateY(int y);
+	QGraphicsSimpleTextItem* getTextNumber(int n, int x, int y);
+	void showBalls();
 	void hideBalls();
 };
 

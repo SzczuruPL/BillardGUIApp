@@ -1,2 +1,5 @@
-﻿  main.cpp
-  BilardGUIApp.vcxproj -> C:\Users\Arkadiusz\source\repos\BillardGUIApp\x64\Debug\BilardGUIApp.exe
+﻿  Ball.cpp
+  Game.cpp
+  main.cpp
+C:\Users\Arkadiusz\source\repos\BillardGUIApp\BilardGUIApp\Game.cpp(32,12): error C2039: 'hit': is not a member of 'Game'
+C:\Users\Arkadiusz\source\repos\BillardGUIApp\BilardGUIApp\Game.h(8): message : see declaration of 'Game'

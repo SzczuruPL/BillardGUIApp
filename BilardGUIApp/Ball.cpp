@@ -11,12 +11,13 @@ Ball::Ball(int r, int number, int mass, Board* board)
 	this->board = board;
 	speed = 0;
 	onBoard = false;
-	changed = rand() % 3;
+	changed = false;
+	//changed = rand() % 3;
 }
 
 Color Ball::getColor()
 {
-	return (number<9)?(Color)number:(Color)(number-9);
+	return (number<9)?(Color)number:(Color)(number-8);
 }
 
 Type Ball::getType()

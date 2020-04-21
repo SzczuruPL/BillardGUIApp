@@ -26,6 +26,7 @@ void Board::setBalls()
 {
 	Ball* ball = new Ball(r, 0, cue_mass, this);
 	ball->setInitialCueCoordinates(this);
+	balls->push_back(ball);
 	int k = 1;
 	for (int i = 0;i <= 4;i++) //TODO: bile ustawiaja sie wedlug numerow, trzeba to rozwiazac
 	{
@@ -81,5 +82,15 @@ int Board::getHeight()
 int Board::getCof()
 {
 	return cof;
+}
+
+void Board::setBall(int n, int x, int y)
+{
+
+}
+
+Ball* Board::getBall(int n)
+{
+	return nullptr;
 }
 

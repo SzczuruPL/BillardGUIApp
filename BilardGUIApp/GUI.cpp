@@ -1,6 +1,7 @@
 #include "GUI.h"
 
-GUI::GUI()
+GUI::GUI() :
+	qColor{ Qt::white,Qt::yellow,Qt::darkBlue,Qt::darkRed,Qt::darkMagenta,Qt::darkYellow,Qt::darkGreen,Qt::darkGray,Qt::black }
 {
 	scene = new QGraphicsScene();
 	view = new QGraphicsView(scene);
@@ -33,22 +34,28 @@ void GUI::draw()
 	for (int i = 0; i < balls->size(); i++) {
 		int x = getGUICoordinateX(balls->at(i)->getX());
 		int y = getGUICoordinateY(balls->at(i)->getY());
+		QGraphicsSimpleTextItem* text = new QGraphicsSimpleTextItem();
 		QGraphicsEllipseItem* ellipse = new QGraphicsEllipseItem();
-		ellipse->setRect(x , y, guiDiameter, guiDiameter);
-		ellipse->setBrush(Qt::darkRed);
+		ellipse->setRect(x - (guiDiameter / 2), y - (guiDiameter / 2), guiDiameter, guiDiameter);
+		ellipse->setBrush(qColor[balls->at(i)->getColor()]);
 		guiBalls.push_back(ellipse);
 		scene->addItem(ellipse);
+		guiBallNumbers.push_back(getTextNumber(i, x, y));
 	}
 }
 void GUI::refresh()
 {
 	for (int i = 0; i < balls->size(); i++)
 	{
-		int x = getGUICoordinateX(balls->at(i)->getX());
-		int y = getGUICoordinateY(balls->at(i)->getY());
-		guiBalls.at(i)->setRect(x, y, guiDiameter, guiDiameter);
-		guiBalls.at(i)->setBrush(Qt::darkRed);
+		if (balls->at(i)->hasChanged())
+		{
+			int x = getGUICoordinateX(balls->at(i)->getX());
+			int y = getGUICoordinateY(balls->at(i)->getY());
+			guiBalls.at(i)->setRect(x - (guiDiameter / 2), y - (guiDiameter / 2), guiDiameter, guiDiameter);
+			guiBalls.at(i)->setBrush(qColor[balls->at(i)->getColor()]);
+		}
 	}
+	showBalls();
 }
 void GUI::setGuiWidth(int guiWidth)
 {
@@ -84,7 +91,41 @@ int GUI::getGUICoordinateY(int y)
 {
 	return (guiHeight * y / board->getHeight());
 }
+QGraphicsSimpleTextItem* GUI::getTextNumber(int n, int x, int y)
+{
+	std::string s = std::to_string(n);
+	QString qs = QString::fromStdString(s);
+	QGraphicsSimpleTextItem* text = new QGraphicsSimpleTextItem();
+	QFont* font = new QFont();
+	font->setPointSize(20);
+	text->setFont(*font);
+	text->setText(qs);
+	if (n < 10)
+		text->setPos(x - 7, y - 16);
+	else
+		text->setPos(x - 15, y - 16);
+	scene->addItem(text);
+	return text;
+}
+void GUI::showBalls()
+{
+	for (int i = 0;i < guiBalls.size();i++)
+	{
+		if (balls->at(i)->hasChanged())
+		{
+			guiBalls.at(i)->setVisible(true);
+		}
 
+	}
+	for (int i = 0;i < guiBallNumbers.size();i++)
+	{
+		if (balls->at(i)->hasChanged())
+		{
+			guiBallNumbers.at(i)->setVisible(true);
+		}
+
+	}
+}
 void GUI::hideBalls()
 {
 	for (int i = 0;i < guiBalls.size();i++)
@@ -94,6 +135,14 @@ void GUI::hideBalls()
 			guiBalls.at(i)->setVisible(false);
 		}
 			
+	}
+	for (int i = 0;i < guiBallNumbers.size();i++)
+	{
+		if (balls->at(i)->hasChanged())
+		{
+			guiBallNumbers.at(i)->setVisible(false);
+		}
+
 	}
 }
 

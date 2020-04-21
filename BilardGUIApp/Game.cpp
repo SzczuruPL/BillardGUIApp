@@ -29,6 +29,11 @@ void Game::start()
 
 }
 
+void Game::hit(int v0)
+{
+	
+}
+
 void Game::readConf()
 {
 	std::ifstream fin;

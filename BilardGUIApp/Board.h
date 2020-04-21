@@ -29,5 +29,7 @@ public:
 	int getWidth();
 	int getHeight();
 	int getCof();
+	void setBall(int n, int x, int y);
+	Ball* getBall(int n);
 };
 
