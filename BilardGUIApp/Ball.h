@@ -6,13 +6,17 @@ class Ball
 {
 private:
 	int r; // promien kuli
+	int x0;
+	int y0;
 	int x;
 	int y;
 	//Color color;
 	int number;
 	//Type type;
 	int speed;
+	int v0;
 	int angle; // kat uderzenia liczony od wspol x (patrz uklad wspl)
+	double a; //przyspieszenie
 	bool onBoard;
 	int mass;
 	Board* board;
@@ -33,6 +37,13 @@ public:
 	void setInitialCoordinates(int i, int j,Board *board); //i-nr kolumny, j-nr przekatnej (patrz rys.1)
 	void setInitialCueCoordinates(Board* board);
 	void setOnBoard(bool onBoard);
+	void setChanged(bool changed);
+	double getX(int t);
+	double getY(int t);
+	double getVx(int t);
+	double getVy(int t);
+	void setX(int x);
+	void setY(int y);
 	bool isMoving();
 	void recountPosition();
 	void recountVelocity();

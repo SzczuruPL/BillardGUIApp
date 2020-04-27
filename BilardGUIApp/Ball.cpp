@@ -2,6 +2,7 @@
 #include "Game.h"
 #include <ctime>
 #include <cstdlib>
+#include <cmath>
 
 Ball::Ball(int r, int number, int mass, Board* board)
 {
@@ -86,6 +87,61 @@ void Ball::setInitialCueCoordinates(Board* board)
 void Ball::setOnBoard(bool onBoard)
 {
 	this->onBoard = onBoard;
+}
+
+void Ball::setChanged(bool changed)
+{
+	this->changed = changed;
+}
+
+double Ball::getX(int t)
+{
+	double g = board->getG() / 100.;
+	double cof = board->getCof() / 100.;
+	double v0x = v0 * cos(angle);
+	double a = cof * g;
+	double ax = a * cos(angle);
+	return x0 + v0x * t + ax * t * t / 2;
+}
+
+double Ball::getY(int t)
+{
+	double g = board->getG() / 100.;
+	double cof = board->getCof() / 100.;
+	double v0y = v0 * sin(angle);
+	double a = cof * g;
+	double ay = a * sin(angle);
+	return y0 + v0y * t + ay * t * t / 2;
+}
+
+double Ball::getVx(int t)
+{
+	double g = board->getG() / 100.;
+	double cof = board->getCof() / 100.;
+	double v0x = v0 * cos(angle);
+	double a = cof * g;
+	double ax = a * cos(angle);
+	return v0x + ax * t;
+}
+
+double Ball::getVy(int t)
+{
+	double g = board->getG() / 100.;
+	double cof = board->getCof() / 100.;
+	double v0y = v0 * sin(angle);
+	double a = cof * g;
+	double ay = a * sin(angle);
+	return v0y + ay * t;
+}
+
+void Ball::setX(int x)
+{
+	this->x = x;
+}
+
+void Ball::setY(int y)
+{
+	this->y = y;
 }
 
 bool Ball::isMoving()

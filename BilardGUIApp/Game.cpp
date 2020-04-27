@@ -6,7 +6,7 @@
 Game::Game(GUI* gui)
 {
 	readConf();		
-	board = new Board(config["guiCoef"], config["width"], config["height"], config["cof"], config["diameter"], config["mass"], config["cueMass"],gui);
+	board = new Board(config["guiCoef"], config["width"], config["height"], config["cof"], config["diameter"], config["mass"], config["cueMass"], config["gravity"], gui);
 	this->gui = gui;
 	gui->print(config["guiWidth"]);
 	gui->setGuiCoef(config["guiCoef"]);
@@ -24,14 +24,27 @@ void Game::draw()
 	board->draw();
 }
 
+void Game::setScene(QGraphicsScene* scene)
+{
+
+}
+
 void Game::start()
 {
 
 }
 
-void Game::hit(int v0)
+void Game::hit(double v0)
 {
-	
+	Ball* s = board->getBall(0);
+	while(v0>0)
+	{
+		s->setChanged(1);
+		board->setBall(0, s->getX() + v0, s->getY());
+		gui->refresh();
+		v0 = v0 - 1;
+		gui->delay(17);
+	}
 }
 
 void Game::readConf()

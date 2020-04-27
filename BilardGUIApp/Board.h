@@ -18,17 +18,19 @@ private:
 	int height;
 	int cof;
 	int r;
+	int g;
 	int mass;
 	int cue_mass;
 	std::vector <Ball*> *balls;
 	GUI* gui;
 public:
-	Board(int guiCoef, int width,int height,int cof, int diameter, int mass, int cue_mass, GUI* gui);
+	Board(int guiCoef, int width,int height,int cof, int diameter, int mass, int cue_mass, int g, GUI* gui);
 	void draw();
 	void setBalls();
 	int getWidth();
 	int getHeight();
 	int getCof();
+	int getG();
 	void setBall(int n, int x, int y);
 	Ball* getBall(int n);
 };

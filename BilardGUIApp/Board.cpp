@@ -3,7 +3,7 @@
 #include <ctime>
 
 
-Board::Board(int guiCoef, int width, int height, int cof, int diameter, int mass, int cue_mass,GUI* gui)
+Board::Board(int guiCoef, int width, int height, int cof, int diameter, int mass, int cue_mass, int g ,GUI* gui)
 {
 	/*print("test");*/
 	//std::cout << guiWidth << ' ' << guiHeight << ' ' << guiCoef;
@@ -11,6 +11,7 @@ Board::Board(int guiCoef, int width, int height, int cof, int diameter, int mass
 	this->width=width;
 	this->height=height;
 	this->cof=cof;
+	this->g=g;
 	this->r=diameter/2;
 	this->mass = mass;
 	this->cue_mass = cue_mass;
@@ -84,13 +85,19 @@ int Board::getCof()
 	return cof;
 }
 
+int Board::getG()
+{
+	return g;
+}
+
 void Board::setBall(int n, int x, int y)
 {
-
+	balls->at(n)->setX(x);
+	balls->at(n)->setY(y);
 }
 
 Ball* Board::getBall(int n)
 {
-	return nullptr;
+	return balls->at(n);
 }
 

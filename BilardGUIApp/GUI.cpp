@@ -53,9 +53,17 @@ void GUI::refresh()
 			int y = getGUICoordinateY(balls->at(i)->getY());
 			guiBalls.at(i)->setRect(x - (guiDiameter / 2), y - (guiDiameter / 2), guiDiameter, guiDiameter);
 			guiBalls.at(i)->setBrush(qColor[balls->at(i)->getColor()]);
+			setTextNumber(guiBallNumbers.at(i), balls->at(i), x, y);
 		}
 	}
-	showBalls();
+	//showBalls();
+}
+
+void GUI::delay(int i)
+{
+	QTime dieTime = QTime::currentTime().addMSecs(i);
+	while (QTime::currentTime() < dieTime)
+		QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
 void GUI::setGuiWidth(int guiWidth)
 {
@@ -107,43 +115,50 @@ QGraphicsSimpleTextItem* GUI::getTextNumber(int n, int x, int y)
 	scene->addItem(text);
 	return text;
 }
-void GUI::showBalls()
+void GUI::setTextNumber(QGraphicsSimpleTextItem* text, Ball* ball, int x, int y)
 {
-	for (int i = 0;i < guiBalls.size();i++)
-	{
-		if (balls->at(i)->hasChanged())
-		{
-			guiBalls.at(i)->setVisible(true);
-		}
-
-	}
-	for (int i = 0;i < guiBallNumbers.size();i++)
-	{
-		if (balls->at(i)->hasChanged())
-		{
-			guiBallNumbers.at(i)->setVisible(true);
-		}
-
-	}
+	if (ball->getNumber() < 10)
+		text->setPos(x - 7, y - 16);
+	else
+		text->setPos(x - 15, y - 16);
 }
-void GUI::hideBalls()
-{
-	for (int i = 0;i < guiBalls.size();i++)
-	{
-		if (balls->at(i)->hasChanged())
-		{
-			guiBalls.at(i)->setVisible(false);
-		}
-			
-	}
-	for (int i = 0;i < guiBallNumbers.size();i++)
-	{
-		if (balls->at(i)->hasChanged())
-		{
-			guiBallNumbers.at(i)->setVisible(false);
-		}
-
-	}
-}
+//void GUI::showBalls()
+//{
+//	for (int i = 0;i < guiBalls.size();i++)
+//	{
+//		if (balls->at(i)->hasChanged())
+//		{
+//			guiBalls.at(i)->setVisible(true);
+//		}
+//
+//	}
+//	for (int i = 0;i < guiBallNumbers.size();i++)
+//	{
+//		if (balls->at(i)->hasChanged())
+//		{
+//			guiBallNumbers.at(i)->setVisible(true);
+//		}
+//
+//	}
+//}
+//void GUI::hideBalls()
+//{
+//	for (int i = 0;i < guiBalls.size();i++)
+//	{
+//		if (balls->at(i)->hasChanged())
+//		{
+//			guiBalls.at(i)->setVisible(false);
+//		}
+//			
+//	}
+//	for (int i = 0;i < guiBallNumbers.size();i++)
+//	{
+//		if (balls->at(i)->hasChanged())
+//		{
+//			guiBallNumbers.at(i)->setVisible(false);
+//		}
+//
+//	}
+//}
 
 

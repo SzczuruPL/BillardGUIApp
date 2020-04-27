@@ -8,6 +8,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsEllipseItem>
 #include <vector>
+#include <QTime>
 
 //QBrush qColor[] = { Qt::white,Qt::yellow };
 class Board;
@@ -33,6 +34,7 @@ public:
 	void show();
 	void draw();
 	void refresh();
+	void delay(int i);
 	void setGuiWidth(int guiWidth);
 	void setGuiHeight(int guiHeight);
 	void setGuiDiameter(int guiDiameter);
@@ -41,7 +43,8 @@ public:
 	int getGUICoordinateX(int x);
 	int getGUICoordinateY(int y);
 	QGraphicsSimpleTextItem* getTextNumber(int n, int x, int y);
-	void showBalls();
-	void hideBalls();
+	void setTextNumber(QGraphicsSimpleTextItem* text, Ball* ball, int x, int y);
+	//void showBalls();
+	//void hideBalls();
 };
 
