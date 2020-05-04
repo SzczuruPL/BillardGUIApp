@@ -17,7 +17,7 @@ int main(int argc, char* argv[])
 	Game bilard(gui);
 	bilard.draw();
 	gui->show();
-	bilard.hit(40);
+	//bilard.hit_tmp(40);
 	//delay(2000);
 	//gui->hideBalls();
 	////bilard.hit(30);

@@ -6,10 +6,11 @@
 Game::Game(GUI* gui)
 {
 	readConf();		
-	board = new Board(config["guiCoef"], config["width"], config["height"], config["cof"], config["diameter"], config["mass"], config["cueMass"], config["gravity"], gui);
+	board = new Board(config["width"], config["height"], config["cof"], config["diameter"], config["mass"], config["cueMass"], config["gravity"], gui);
 	this->gui = gui;
-	gui->print(config["guiWidth"]);
+	//gui->print(config["guiWidth"]);
 	gui->setGuiCoef(config["guiCoef"]);
+	//gui->print(config["guiCoef"]);
 	gui->setGuiWidth(config["guiWidth"]);
 	gui->setGuiHeight(config["guiWidth"] * config["height"] / config["width"]);
 	gui->setGuiDiameter(config["diameter"] * config["guiWidth"]/ config["width"]);
@@ -33,8 +34,11 @@ void Game::start()
 {
 
 }
+void Game::hit()
+{
 
-void Game::hit(double v0)
+}
+void Game::hit_tmp(double v0)
 {
 	Ball* s = board->getBall(0);
 	while(v0>0)

@@ -12,14 +12,15 @@ private:
 	Player *player1;
 	Player *player2;
 	int intervalTime; //ms
-	std::map < std::string, int> config;
+	std::map < std::string, double> config;
 	GUI* gui;
 public:
 	Game(GUI* gui);
 	void draw();
 	void setScene(QGraphicsScene* scene);
 	void start();
-	void hit(double v0);
+	void hit();
+	void hit_tmp(double v0);
 	void readConf();
 
 };

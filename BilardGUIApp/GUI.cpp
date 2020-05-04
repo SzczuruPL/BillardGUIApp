@@ -19,7 +19,7 @@ void GUI::print(int i)
 {
 	//std::cout << width << ' ' << height << ' ' << cof << ' ' << r << std::endl;
 	std::string s = std::to_string(i);
-	QString qs = QString::fromStdString("ala ma kota");
+	QString qs = QString::fromStdString(s);
 	QGraphicsSimpleTextItem* text = new QGraphicsSimpleTextItem();
 	text->setText(qs);
 	text->setPos(0, 0);
@@ -31,11 +31,12 @@ void GUI::draw()
 	rect->setRect(0, 0, guiWidth, guiHeight);
 	rect->setBrush(Qt::darkGreen);
 	scene->addItem(rect);
+	//print(guiHeight);
 	for (int i = 0; i < balls->size(); i++) {
 		int x = getGUICoordinateX(balls->at(i)->getX());
 		int y = getGUICoordinateY(balls->at(i)->getY());
 		QGraphicsSimpleTextItem* text = new QGraphicsSimpleTextItem();
-		QGraphicsEllipseItem* ellipse = new QGraphicsEllipseItem();
+		QGraphicsEllipseItem* ellipse = new QGraphicsEllipseItem();;
 		ellipse->setRect(x - (guiDiameter / 2), y - (guiDiameter / 2), guiDiameter, guiDiameter);
 		ellipse->setBrush(qColor[balls->at(i)->getColor()]);
 		guiBalls.push_back(ellipse);
@@ -59,25 +60,27 @@ void GUI::refresh()
 	//showBalls();
 }
 
-void GUI::delay(int i)
+void GUI::delay(double i)
 {
-	QTime dieTime = QTime::currentTime().addMSecs(i);
+	QTime dieTime = QTime::currentTime().addMSecs(i*1000);
 	while (QTime::currentTime() < dieTime)
 		QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
-void GUI::setGuiWidth(int guiWidth)
+void GUI::setGuiWidth(double guiWidth)
 {
-	this->guiWidth = guiWidth * guiCoef / 100;
+	this->guiWidth = guiWidth * guiCoef;
 }
-void GUI::setGuiHeight(int guiHeight)
+void GUI::setGuiHeight(double guiHeight)
 {
-	this->guiHeight = guiHeight * guiCoef / 100;
+	//print(guiCoef);
+	this->guiHeight = guiHeight * guiCoef;
 }
-void GUI::setGuiDiameter(int guiDiameter)
+void GUI::setGuiDiameter(double guiDiameter)
 {
-	this->guiDiameter = guiDiameter * guiCoef / 100;
+	//print(guiCoef * 10);
+	this->guiDiameter = guiDiameter * guiCoef;
 }
-void GUI::setGuiCoef(int guiCoef)
+void GUI::setGuiCoef(double guiCoef)
 {
 	this->guiCoef = guiCoef;
 }
@@ -90,12 +93,12 @@ void GUI::show()
 	view->show();
 }
 
-int GUI::getGUICoordinateX(int x)
+int GUI::getGUICoordinateX(double x)
 {
 	return (guiWidth * x / board->getWidth());
 }
 
-int GUI::getGUICoordinateY(int y)
+int GUI::getGUICoordinateY(double y)
 {
 	return (guiHeight * y / board->getHeight());
 }

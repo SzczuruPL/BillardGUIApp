@@ -14,24 +14,24 @@ class GUI;
 class Board
 {
 private:
-	int width;
-	int height;
-	int cof;
-	int r;
-	int g;
-	int mass;
-	int cue_mass;
+	double width;
+	double height;
+	double cof;
+	double r;
+	double g;
+	double mass;
+	double cue_mass;
 	std::vector <Ball*> *balls;
 	GUI* gui;
 public:
-	Board(int guiCoef, int width,int height,int cof, int diameter, int mass, int cue_mass, int g, GUI* gui);
+	Board(double width, double height, double cof, double diameter, double mass, double cue_mass, double g, GUI* gui);
 	void draw();
 	void setBalls();
-	int getWidth();
-	int getHeight();
-	int getCof();
-	int getG();
-	void setBall(int n, int x, int y);
+	double getWidth();
+	double getHeight();
+	double getCof();
+	double getG();
+	void setBall(int n, double x, double y);
 	Ball* getBall(int n);
 };
 

@@ -5,32 +5,32 @@ class Board;
 class Ball
 {
 private:
-	int r; // promien kuli
-	int x0;
-	int y0;
-	int x;
-	int y;
+	double r; // promien kuli
+	double x0;
+	double y0;
+	double x;
+	double y;
 	//Color color;
 	int number;
 	//Type type;
-	int speed;
-	int v0;
-	int angle; // kat uderzenia liczony od wspol x (patrz uklad wspl)
+	double speed;
+	double v0;
+	double angle; // kat uderzenia liczony od wspol x (patrz uklad wspl)
 	double a; //przyspieszenie
 	bool onBoard;
-	int mass;
+	double mass;
 	Board* board;
 	bool changed;
 public:
-	Ball (int r, int number, int mass, Board* board);
+	Ball (double r, int number, double mass, Board* board);
 	Color getColor();
 	Type getType();
-	int getRadius();
-	int getX();
-	int getY();
+	double getRadius();
+	double getX();
+	double getY();
 	int getNumber();
-	int getSpeed();
-	int getAngle();
+	double getSpeed();
+	double getAngle();
 	bool isTouchingEdge();
 	bool isTouchingAnotherBall(Ball *ball);
 	void move();
@@ -38,12 +38,12 @@ public:
 	void setInitialCueCoordinates(Board* board);
 	void setOnBoard(bool onBoard);
 	void setChanged(bool changed);
-	double getX(int t);
-	double getY(int t);
-	double getVx(int t);
-	double getVy(int t);
-	void setX(int x);
-	void setY(int y);
+	double getX(double t);
+	double getY(double t);
+	double getVx(double t);
+	double getVy(double t);
+	void setX(double x);
+	void setY(double y);
 	bool isMoving();
 	void recountPosition();
 	void recountVelocity();
