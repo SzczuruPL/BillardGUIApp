@@ -1,7 +1,6 @@
 #include "GUI.h"
 
-GUI::GUI() :
-	qColor{ Qt::white,Qt::yellow,Qt::darkBlue,Qt::darkRed,Qt::darkMagenta,Qt::darkYellow,Qt::darkGreen,Qt::darkGray,Qt::black }
+GUI::GUI()
 {
 	scene = new QGraphicsScene();
 	view = new QGraphicsView(scene);
@@ -25,20 +24,23 @@ void GUI::print(int i)
 	text->setPos(0, 0);
 	scene->addItem(text);
 }
-void GUI::draw()
+
+void GUI::drawTable()
 {
 	QGraphicsRectItem* rect = new QGraphicsRectItem();
 	rect->setRect(0, 0, guiWidth, guiHeight);
 	rect->setBrush(Qt::darkGreen);
 	scene->addItem(rect);
+}
+
+void GUI::draw()
+{
+	drawTable();
 	//print(guiHeight);
 	for (int i = 0; i < balls->size(); i++) {
 		int x = getGUICoordinateX(balls->at(i)->getX());
 		int y = getGUICoordinateY(balls->at(i)->getY());
-		QGraphicsSimpleTextItem* text = new QGraphicsSimpleTextItem();
-		QGraphicsEllipseItem* ellipse = new QGraphicsEllipseItem();;
-		ellipse->setRect(x - (guiDiameter / 2), y - (guiDiameter / 2), guiDiameter, guiDiameter);
-		ellipse->setBrush(qColor[balls->at(i)->getColor()]);
+		GUIBall* ball = new GUIBall(x , y , guiDiameter, i);
 		guiBalls.push_back(ellipse);
 		scene->addItem(ellipse);
 		guiBallNumbers.push_back(getTextNumber(i, x, y));
@@ -69,6 +71,10 @@ void GUI::delay(double i)
 void GUI::setGuiWidth(double guiWidth)
 {
 	this->guiWidth = guiWidth * guiCoef;
+}
+void GUI::addItem(QGraphicsItem* item)
+{
+	scene->addItem(item);
 }
 void GUI::setGuiHeight(double guiHeight)
 {

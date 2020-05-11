@@ -85,7 +85,9 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="GUIBall.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MyWidget.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +105,8 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="GUIBall.h" />
+    <ClInclude Include="MyWidget.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>

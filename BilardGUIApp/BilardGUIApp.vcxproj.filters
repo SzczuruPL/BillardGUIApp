@@ -46,6 +46,12 @@
     <ClCompile Include="GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GUIBall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MyWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="BilardGUIApp.h">
@@ -79,6 +85,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GUIBall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MyWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

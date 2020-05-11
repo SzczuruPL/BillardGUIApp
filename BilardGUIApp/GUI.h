@@ -1,5 +1,6 @@
 #pragma once
 #include "Ball.h"
+#include "GUIBall.h"
 #include "Board.h"
 #include "Constants.h"
 #include <QApplication>
@@ -23,10 +24,11 @@ private:
 	double guiCoef;
 	int guiDiameter;
 	std::vector <Ball*> *balls;
-	std::vector <QGraphicsEllipseItem*> guiBalls;
-	std::vector <QGraphicsSimpleTextItem*> guiBallNumbers;
+	std::vector <GUIBall*> guiBalls;
+	//std::vector <QGraphicsEllipseItem*> guiBalls;
+	//std::vector <QGraphicsSimpleTextItem*> guiBallNumbers;
 	Board* board;
-	const QBrush qColor[9];
+	void drawTable();
 public:
 	GUI();
 	void print(std::string s);
@@ -36,6 +38,7 @@ public:
 	void refresh();
 	void delay(double i);
 	void setGuiWidth(double guiWidth);
+	void addItem(QGraphicsItem* item);
 	void setGuiHeight(double guiHeight);
 	void setGuiDiameter(double guiDiameter);
 	void setGuiCoef(double guiCoef);
