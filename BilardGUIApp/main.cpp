@@ -34,12 +34,12 @@ int main(int argc, char* argv[])
 	bilard.draw();
 	gui->show();
 
-	MyWidget myWidget;
-	myWidget.show();
-	//bilard.hit_tmp(40);
+	//MyWidget myWidget;
+	//myWidget.show();
+	bilard.hit_tmp(40);
 	//delay(2000);
 	//gui->hideBalls();
-	////bilard.hit(30);
+	//bilard.hit(30);
 	//delay(5000);
 	//gui->refresh();
 	return a.exec();

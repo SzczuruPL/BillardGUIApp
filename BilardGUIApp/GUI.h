@@ -12,6 +12,7 @@
 #include <QTime>
 
 //QBrush qColor[] = { Qt::white,Qt::yellow };
+class GUIBall;
 class Board;
 class Ball;
 class GUI
@@ -29,6 +30,7 @@ private:
 	//std::vector <QGraphicsSimpleTextItem*> guiBallNumbers;
 	Board* board;
 	void drawTable();
+	int posText;
 public:
 	GUI();
 	void print(std::string s);
@@ -45,8 +47,6 @@ public:
 	void setBalls(std::vector <Ball*> *balls);
 	int getGUICoordinateX(double x);
 	int getGUICoordinateY(double y);
-	QGraphicsSimpleTextItem* getTextNumber(int n, int x, int y);
-	void setTextNumber(QGraphicsSimpleTextItem* text, Ball* ball, int x, int y);
 	//void showBalls();
 	//void hideBalls();
 };

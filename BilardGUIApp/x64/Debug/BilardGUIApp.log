@@ -1,2 +1,3 @@
-﻿  main.cpp
+﻿  GUIBall.cpp
+C:\Users\Arkadiusz\source\repos\BillardGUIApp\BilardGUIApp\GUIBall.cpp(46,24): warning C4311: 'type cast': pointer truncation from 'QGraphicsEllipseItem *' to 'int'
   BilardGUIApp.vcxproj -> C:\Users\Arkadiusz\source\repos\BillardGUIApp\x64\Debug\BilardGUIApp.exe

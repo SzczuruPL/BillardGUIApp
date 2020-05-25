@@ -2,6 +2,7 @@
 
 GUI::GUI()
 {
+	posText = 0;
 	scene = new QGraphicsScene();
 	view = new QGraphicsView(scene);
 }
@@ -21,8 +22,9 @@ void GUI::print(int i)
 	QString qs = QString::fromStdString(s);
 	QGraphicsSimpleTextItem* text = new QGraphicsSimpleTextItem();
 	text->setText(qs);
-	text->setPos(0, 0);
+	text->setPos(0, posText);
 	scene->addItem(text);
+	posText = posText + 20;
 }
 
 void GUI::drawTable()
@@ -40,23 +42,22 @@ void GUI::draw()
 	for (int i = 0; i < balls->size(); i++) {
 		int x = getGUICoordinateX(balls->at(i)->getX());
 		int y = getGUICoordinateY(balls->at(i)->getY());
-		GUIBall* ball = new GUIBall(x , y , guiDiameter, i);
-		guiBalls.push_back(ellipse);
-		scene->addItem(ellipse);
-		guiBallNumbers.push_back(getTextNumber(i, x, y));
+		GUIBall* ball = new GUIBall(x , y , guiDiameter, i, this);
+		guiBalls.push_back(ball);
+		//ball.addItem(ellipse);
+		//guiBallNumbers.push_back(getTextNumber(i, x, y));
 	}
 }
 void GUI::refresh()
 {
+
 	for (int i = 0; i < balls->size(); i++)
 	{
 		if (balls->at(i)->hasChanged())
 		{
-			int x = getGUICoordinateX(balls->at(i)->getX());
+			int x = getGUICoordinateX(balls->at(i)->getX()) + 100;
 			int y = getGUICoordinateY(balls->at(i)->getY());
-			guiBalls.at(i)->setRect(x - (guiDiameter / 2), y - (guiDiameter / 2), guiDiameter, guiDiameter);
-			guiBalls.at(i)->setBrush(qColor[balls->at(i)->getColor()]);
-			setTextNumber(guiBallNumbers.at(i), balls->at(i), x, y);
+			guiBalls.at(i)->refresh();
 		}
 	}
 	//showBalls();
@@ -107,29 +108,6 @@ int GUI::getGUICoordinateX(double x)
 int GUI::getGUICoordinateY(double y)
 {
 	return (guiHeight * y / board->getHeight());
-}
-QGraphicsSimpleTextItem* GUI::getTextNumber(int n, int x, int y)
-{
-	std::string s = std::to_string(n);
-	QString qs = QString::fromStdString(s);
-	QGraphicsSimpleTextItem* text = new QGraphicsSimpleTextItem();
-	QFont* font = new QFont();
-	font->setPointSize(20);
-	text->setFont(*font);
-	text->setText(qs);
-	if (n < 10)
-		text->setPos(x - 7, y - 16);
-	else
-		text->setPos(x - 15, y - 16);
-	scene->addItem(text);
-	return text;
-}
-void GUI::setTextNumber(QGraphicsSimpleTextItem* text, Ball* ball, int x, int y)
-{
-	if (ball->getNumber() < 10)
-		text->setPos(x - 7, y - 16);
-	else
-		text->setPos(x - 15, y - 16);
 }
 //void GUI::showBalls()
 //{
