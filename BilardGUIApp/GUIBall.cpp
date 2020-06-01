@@ -9,13 +9,15 @@ GUIBall::GUIBall(int x, int y, int diameter, int number, GUI *gui) :
 	this->y = y;
 	this->diameter = diameter;
 	this->number = number;
-	QGraphicsEllipseItem* circle = new QGraphicsEllipseItem();
-	gui->addItem(circle);
-	QGraphicsRectItem* stripe = new QGraphicsRectItem();
-	gui->addItem(stripe);
-	QGraphicsSimpleTextItem* textNumber = getTextNumber();
-	circle->setRect(x - (diameter / 2), y - (diameter / 2), diameter, diameter);
+	circle = new QGraphicsEllipseItem();
+	//gui->addItem(circle);
+	stripe = new QGraphicsRectItem();
+	//gui->addItem(stripe);
+	textNumber = getTextNumber();	
 	circle->setBrush(qColor[getColor()]);
+	circle->setRect(x - (diameter / 2), y - (diameter / 2), diameter, diameter);
+
+	
 }
 QGraphicsSimpleTextItem* GUIBall::getTextNumber()
 {
@@ -30,7 +32,7 @@ QGraphicsSimpleTextItem* GUIBall::getTextNumber()
 		text->setPos(x - 7, y - 16);
 	else
 		text->setPos(x - 15, y - 16);
-	gui->addItem(text);
+	//gui->addItem(text);
 	return text;
 }
 void GUIBall::setTextNumber()
@@ -42,10 +44,15 @@ void GUIBall::setTextNumber()
 }
 void GUIBall::refresh()
 {
-	//circle->setRect(x - (diameter / 2), y - (diameter / 2), diameter, diameter);
-	gui->print((int)circle);
+	circle->setRect(x - (diameter / 2), y - (diameter / 2), diameter, diameter);	
 	//circle->setBrush(qColor[balls->at(i)->getColor()]);
-	//setTextNumber();
+	setTextNumber();
+}
+void GUIBall::addScene()
+{
+	gui->addItem(circle);
+	gui->addItem(stripe);
+	gui->addItem(textNumber);
 }
 Color GUIBall::getColor()
 {

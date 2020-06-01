@@ -45,9 +45,10 @@ void Game::hit_tmp(double v0)
 	{
 		s->setChanged(1);
 		board->setBall(0, s->getX() + v0, s->getY());
+		//gui->print(s->getX() + v0);
 		gui->refresh();
 		v0 = v0 - 1;
-		gui->delay(17);
+		gui->delay(0.017);
 	}
 }
 

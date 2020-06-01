@@ -25,6 +25,7 @@ public:
 	QGraphicsSimpleTextItem* getTextNumber();
 	void setTextNumber();
 	void refresh();
+	void addScene();
 	Color getColor();
 };
 

@@ -38,14 +38,12 @@ void GUI::drawTable()
 void GUI::draw()
 {
 	drawTable();
-	//print(guiHeight);
 	for (int i = 0; i < balls->size(); i++) {
 		int x = getGUICoordinateX(balls->at(i)->getX());
 		int y = getGUICoordinateY(balls->at(i)->getY());
 		GUIBall* ball = new GUIBall(x , y , guiDiameter, i, this);
 		guiBalls.push_back(ball);
-		//ball.addItem(ellipse);
-		//guiBallNumbers.push_back(getTextNumber(i, x, y));
+		ball->addScene();
 	}
 }
 void GUI::refresh()
@@ -55,11 +53,14 @@ void GUI::refresh()
 	{
 		if (balls->at(i)->hasChanged())
 		{
-			int x = getGUICoordinateX(balls->at(i)->getX()) + 100;
+			int x = getGUICoordinateX(balls->at(i)->getX());
+			print(balls->at(i)->getX());
 			int y = getGUICoordinateY(balls->at(i)->getY());
 			guiBalls.at(i)->refresh();
 		}
 	}
+
+	scene->update();
 	//showBalls();
 }
 
