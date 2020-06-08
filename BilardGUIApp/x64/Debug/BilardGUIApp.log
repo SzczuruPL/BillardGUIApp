@@ -1,2 +1,8 @@
-﻿  GUI.cpp
+﻿  Ball.cpp
+  Board.cpp
+  GUI.cpp
+  GUIBall.cpp
+  Game.cpp
+  Player.cpp
+  main.cpp
   BilardGUIApp.vcxproj -> C:\Users\Arkadiusz\source\repos\BillardGUIApp\x64\Debug\BilardGUIApp.exe

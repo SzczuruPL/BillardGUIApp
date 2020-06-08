@@ -54,6 +54,18 @@ void GUIBall::addScene()
 	gui->addItem(stripe);
 	gui->addItem(textNumber);
 }
+int GUIBall::getX()
+{
+	return x;
+}
+void GUIBall::setX(int x)
+{
+	this->x = x;
+}
+void GUIBall::setY(int y)
+{
+	this->y = y;
+}
 Color GUIBall::getColor()
 {
 	return (number < 9) ? (Color)number : (Color)(number - 8);

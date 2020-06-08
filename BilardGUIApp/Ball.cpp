@@ -13,6 +13,7 @@ Ball::Ball(double r, int number, double mass, Board* board)
 	speed = 0;
 	onBoard = false;
 	changed = false;
+	angle = 0;
 	//changed = rand() % 3;
 }
 
@@ -74,14 +75,14 @@ void Ball::move()
 void Ball::setInitialCoordinates(int i, int j,Board *board)
 {
 	double d = 2 * r;
-	x = i * sqrt(3) / 2 * d + 3. / 4. * board->getWidth();
-	y = (double)i * d / 2.0 - (double) d * j + board->getHeight() / 2.0;
+	x = x0 = i * sqrt(3) / 2 * d + 3. / 4. * board->getWidth();
+	y = y0 = (double)i * d / 2.0 - (double) d * j + board->getHeight() / 2.0;
 }
 
 void Ball::setInitialCueCoordinates(Board* board)
 {
-	x = 1. / 4. * board->getWidth();
-	y = board->getHeight() / 2.;
+	x = x0 = 1. / 4. * board->getWidth();
+	y = y0 = board->getHeight() / 2.;
 }
 
 void Ball::setOnBoard(bool onBoard)
@@ -101,7 +102,7 @@ double Ball::getX(double t)
 	double v0x = v0 * cos(angle);
 	double a = cof * g;
 	double ax = a * cos(angle);
-	return x0 + v0x * t + ax * t * t / 2;
+	return x0 + v0x * t - ax * t * t / 2;
 }
 
 double Ball::getY(double t)
@@ -111,27 +112,37 @@ double Ball::getY(double t)
 	double v0y = v0 * sin(angle);
 	double a = cof * g;
 	double ay = a * sin(angle);
-	return y0 + v0y * t + ay * t * t / 2;
+	return y0 + v0y * t - ay * t * t / 2;
 }
 
 double Ball::getVx(double t)
 {
 	double g = board->getG();
 	double cof = board->getCof();
-	double v0x = v0 * cos(angle);
+	Vx = v0 * cos(angle);
 	double a = cof * g;
 	double ax = a * cos(angle);
-	return v0x + ax * t;
+	return Vx - ax * t;
 }
 
 double Ball::getVy(double t)
 {
 	double g = board->getG();
 	double cof = board->getCof();
-	double v0y = v0 * sin(angle);
+	Vy = v0 * sin(angle);
 	double a = cof * g;
 	double ay = a * sin(angle);
-	return v0y + ay * t;
+	return Vy - ay * t;
+}
+
+double Ball::getG()
+{
+	return board->getG();
+}
+
+double Ball::getCof()
+{
+	return board->getCof();
 }
 
 void Ball::setX(double x)
@@ -144,9 +155,19 @@ void Ball::setY(double y)
 	this->y = y;
 }
 
+void Ball::setV0(double v0)
+{
+	this->v0 = v0;
+}
+
+void Ball::setAngle(double angle)
+{
+	this->angle = angle;
+}
+
 bool Ball::isMoving()
 {
-	return false;
+	return (Vx != 0 || Vy != 0);
 }
 
 void Ball::recountPosition()

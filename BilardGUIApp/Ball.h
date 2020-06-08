@@ -15,7 +15,9 @@ private:
 	//Type type;
 	double speed;
 	double v0;
-	double angle; // kat uderzenia liczony od wspol x (patrz uklad wspl)
+	double Vx;
+	double Vy;
+	double angle; // kat W RADIANACH! uderzenia liczony od wspol x (patrz uklad wspl)
 	double a; //przyspieszenie
 	bool onBoard;
 	double mass;
@@ -42,8 +44,12 @@ public:
 	double getY(double t);
 	double getVx(double t);
 	double getVy(double t);
+	double getG();
+	double getCof();
 	void setX(double x);
 	void setY(double y);
+	void setV0(double v0);
+	void setAngle(double angle);
 	bool isMoving();
 	void recountPosition();
 	void recountVelocity();

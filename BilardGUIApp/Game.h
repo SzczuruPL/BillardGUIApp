@@ -20,7 +20,7 @@ public:
 	void setScene(QGraphicsScene* scene);
 	void start();
 	void hit();
-	void hit_tmp(double v0);
+	void hit_tmp(double v0,double r);
 	void readConf();
 
 };

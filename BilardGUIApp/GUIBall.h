@@ -26,6 +26,9 @@ public:
 	void setTextNumber();
 	void refresh();
 	void addScene();
+	int getX();
+	void setX(int x);
+	void setY(int y);
 	Color getColor();
 };
 

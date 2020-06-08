@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 
 	//MyWidget myWidget;
 	//myWidget.show();
-	bilard.hit_tmp(40);
+	bilard.hit_tmp(2,0);
 	//delay(2000);
 	//gui->hideBalls();
 	//bilard.hit(30);

@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "Board.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <fstream>
 
 
@@ -38,17 +40,23 @@ void Game::hit()
 {
 
 }
-void Game::hit_tmp(double v0)
+void Game::hit_tmp(double v0, double angle)
 {
+	double dt = 0.017;
+	double t = 0;
 	Ball* s = board->getBall(0);
-	while(v0>0)
+	s->setAngle(angle * M_PI / 180);
+	s->setV0(v0);
+	while(s->isMoving())
 	{
 		s->setChanged(1);
-		board->setBall(0, s->getX() + v0, s->getY());
+		board->setBall(0, s->getX(t), s->getY(t));
 		//gui->print(s->getX() + v0);
 		gui->refresh();
-		v0 = v0 - 1;
-		gui->delay(0.017);
+		gui->delay(dt);
+		//v0 = s->getVy(t);
+		gui->print((int)v0);
+		t = t + dt;
 	}
 }
 

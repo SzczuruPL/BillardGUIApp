@@ -27,6 +27,7 @@ void GUI::print(int i)
 	posText = posText + 20;
 }
 
+
 void GUI::drawTable()
 {
 	QGraphicsRectItem* rect = new QGraphicsRectItem();
@@ -54,8 +55,9 @@ void GUI::refresh()
 		if (balls->at(i)->hasChanged())
 		{
 			int x = getGUICoordinateX(balls->at(i)->getX());
-			print(balls->at(i)->getX());
 			int y = getGUICoordinateY(balls->at(i)->getY());
+			guiBalls.at(i)->setX(x);
+			guiBalls.at(i)->setY(y);
 			guiBalls.at(i)->refresh();
 		}
 	}
