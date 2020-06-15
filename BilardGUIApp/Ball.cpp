@@ -60,6 +60,9 @@ double Ball::getAngle()
 bool Ball::isTouchingEdge()
 {
 	return true;//(x <= r or x >= board->getWidth() - r or y <= r or y >= board->getHeight() - r);
+
+	//return (pos < 0 || pos > board->getWidth()) ? () : (pos);
+	//return (pos<0 || pos > board->getHeight()) ? (0) : (pos);
 }
 
 bool Ball::isTouchingAnotherBall(Ball *ball)
@@ -102,7 +105,9 @@ double Ball::getX(double t)
 	double v0x = v0 * cos(angle);
 	double a = cof * g;
 	double ax = a * cos(angle);
-	return x0 + v0x * t - ax * t * t / 2;
+	x = x0 + v0x * t - ax * t * t / 2;
+	isTouchingEdge();
+	return x;
 }
 
 double Ball::getY(double t)
@@ -112,27 +117,46 @@ double Ball::getY(double t)
 	double v0y = v0 * sin(angle);
 	double a = cof * g;
 	double ay = a * sin(angle);
-	return y0 + v0y * t - ay * t * t / 2;
+	y = y0 + v0y * t - ay * t * t / 2;
+	return y;
 }
 
 double Ball::getVx(double t)
 {
+	bool vxPositiveS = 0;
+	bool vxPositiveE = 0;
 	double g = board->getG();
 	double cof = board->getCof();
 	Vx = v0 * cos(angle);
+	if (Vx > 0)
+		vxPositiveS = 1;
 	double a = cof * g;
 	double ax = a * cos(angle);
-	return Vx - ax * t;
+	Vx = Vx - ax * t;
+	if (Vx > 0)
+		vxPositiveE = 1;
+	if (vxPositiveS != vxPositiveE)
+		Vx = 0;
+	return Vx;
 }
 
 double Ball::getVy(double t)
 {
+	bool vyPositiveS = 0;
+	bool vyPositiveE = 0;
 	double g = board->getG();
 	double cof = board->getCof();
 	Vy = v0 * sin(angle);
+	if (Vy > 0)
+		vyPositiveS = 1;
 	double a = cof * g;
 	double ay = a * sin(angle);
-	return Vy - ay * t;
+	Vy = Vy - ay * t;
+	if (Vy > 0)
+		vyPositiveE = 1;
+	if (vyPositiveS != vyPositiveE)
+		Vy = 0;
+	return Vy;
 }
 
 double Ball::getG()
@@ -167,7 +191,8 @@ void Ball::setAngle(double angle)
 
 bool Ball::isMoving()
 {
-	return (Vx != 0 || Vy != 0);
+	//return (Vx > 0 && Vy == 0 || Vx == 0 && Vy > 0 || Vx > 0 && Vy > 0);
+	return (Vx != 0 && Vy != 0);
 }
 
 void Ball::recountPosition()

@@ -47,15 +47,19 @@ void Game::hit_tmp(double v0, double angle)
 	Ball* s = board->getBall(0);
 	s->setAngle(angle * M_PI / 180);
 	s->setV0(v0);
+	gui->print(s->getVx(t));
+	s->getVy(t);
 	while(s->isMoving())
 	{
+		gui->print(t*1000);
 		s->setChanged(1);
 		board->setBall(0, s->getX(t), s->getY(t));
 		//gui->print(s->getX() + v0);
 		gui->refresh();
 		gui->delay(dt);
-		//v0 = s->getVy(t);
-		gui->print((int)v0);
+		s->getVy(t);
+		gui->print(s->getVx(t)*1000);
+		//gui->print((int)s->getVx(t));
 		t = t + dt;
 	}
 }
